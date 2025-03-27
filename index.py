@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 app = Flask(__name__)
 
 
@@ -23,7 +23,8 @@ def course():
 
 @app.route("/today")
 def today():
-    now = datetime.now()
+    tz = timezone(timedelta(hours=+8))
+    now = datetime.now(tz)
     return render_template("today.html", datetime = str(now))
 
 @app.route("/about")
